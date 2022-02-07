@@ -25,7 +25,7 @@ public class PlayerStates : MonoBehaviourPunCallbacks
         SyncAnimations();
     }
 
-    void AddPlayers()
+    public void AddPlayers()
     {
         foreach (PlayerMovement player in FindObjectsOfType<PlayerMovement>())
         {
@@ -44,35 +44,39 @@ public class PlayerStates : MonoBehaviourPunCallbacks
         // Update list of players
         foreach (PlayerMovement playerMovement in FindObjectsOfType<PlayerMovement>())
         {
-            bool isNewPlayer = true;
-
-            foreach (Player player in players)
+            if (!playerMovement.GetComponent<PhotonView>().IsMine)
             {
-                if (playerMovement.gameObject == player.playerObject)
+                bool isNewPlayer = true;
+
+                foreach (Player player in players)
                 {
-                    isNewPlayer = false;
+                    if (playerMovement.gameObject == player.playerObject)
+                    {
+                        isNewPlayer = false;
+                    }
                 }
-            }
 
-            if (isNewPlayer)
-            {
-                Player newP = new Player();
-                newP.playerObject = playerMovement.gameObject;
+                if (isNewPlayer)
+                {
+                    Player newP = new Player();
+                    newP.playerObject = playerMovement.gameObject;
 
-                players.Add(newP);
+                    players.Add(newP);
+                }
             }
         }
     }
 
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        
+    }
+
+    // TODO: When player leaves room, find the destroyed object and remove them from the list.
+
     void SyncAnimations()
     {
-        foreach (Player player in players)
-        {
-            if (!player.playerObject.GetComponent<PhotonView>().IsMine)
-            {
-                
-            }
-        }
+        
     }
 
 }
