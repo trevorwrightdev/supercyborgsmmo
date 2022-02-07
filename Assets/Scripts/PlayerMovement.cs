@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     public float speed;
     Vector2 lastClickedPos;
@@ -83,13 +84,13 @@ public class PlayerMovement : MonoBehaviour
     [PunRPC]
     void FlipSprite()
     {
-        rend.flipX = true;
+        if (rend != null) rend.flipX = true;
     }
 
     [PunRPC]
     void UnflipSprite()
     {
-        rend.flipX = false;
+        if (rend != null) rend.flipX = false;
     }
 
     // If player collides with something we can make moving = false
