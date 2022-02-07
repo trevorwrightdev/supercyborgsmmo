@@ -93,5 +93,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (rend != null) rend.flipX = false;
     }
 
+    //TODO: Make orientation stay accurate if player just joins.
+    //TODO: Fix sorting layer issue
+
     // If player collides with something we can make moving = false
 }
