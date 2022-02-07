@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,19 +9,24 @@ public class PlayerMovement : MonoBehaviour
     Vector2 lastClickedPos;
     Animator anim;
     SpriteRenderer rend;
+    PhotonView view;
 
-    bool moving = true;
+    bool moving = false;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
         rend = GetComponentInChildren<SpriteRenderer>();
+        view = GetComponent<PhotonView>();
     }
 
     private void Update()
     {
         // Check for mouse every frame
-        Move();
+        if (view.IsMine)
+        {
+            Move();
+        }
     }
 
     void Move()
@@ -50,11 +56,41 @@ public class PlayerMovement : MonoBehaviour
         // Set inversion
         if (lastClickedPos.x < transform.position.x)
         {
-            rend.flipX = true;
+            FlipX();
         }
         else if (lastClickedPos.x > transform.position.x)
         {
-            rend.flipX = false;
+            UnflipX();
         }
     }
+
+    void FlipX()
+    {
+        if (view.IsMine)
+        {
+            view.RPC("FlipSprite", RpcTarget.AllBuffered);
+        }
+    }
+
+    void UnflipX()
+    {
+        if (view.IsMine)
+        {
+            view.RPC("UnflipSprite", RpcTarget.AllBuffered);
+        }
+    }
+
+    [PunRPC]
+    void FlipSprite()
+    {
+        rend.flipX = true;
+    }
+
+    [PunRPC]
+    void UnflipSprite()
+    {
+        rend.flipX = false;
+    }
+
+    // If player collides with something we can make moving = false
 }

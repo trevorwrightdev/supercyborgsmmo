@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: b20a740596210452a828b40fccace042
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: a8fe9859343fc4ae79024817d654244d
+  - enabled: 1
     path: Assets/Scenes/HyperniaHub.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
