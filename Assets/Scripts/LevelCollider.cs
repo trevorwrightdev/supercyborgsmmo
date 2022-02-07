@@ -6,6 +6,7 @@ using Photon.Pun;
 public class LevelCollider : MonoBehaviour
 {
     public string levelToLoad;
+    public Vector2 spawnLocation;
     LevelManager lvlManager;
 
     private void Start()
@@ -19,7 +20,7 @@ public class LevelCollider : MonoBehaviour
 
         if (collision.GetComponent<PhotonView>().IsMine)
         {
-            lvlManager.LoadLevel(levelToLoad);
+            lvlManager.LoadLevel(levelToLoad, spawnLocation);
         }
 
     }

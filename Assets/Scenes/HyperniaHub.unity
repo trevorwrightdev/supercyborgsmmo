@@ -304,6 +304,14 @@ PrefabInstance:
       propertyPath: levelToLoad
       value: HyperniaShops
       objectReference: {fileID: 0}
+    - target: {fileID: 7365194401896425806, guid: d4331d857473b4dc49ca510951339541, type: 3}
+      propertyPath: spawnLocation.x
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365194401896425806, guid: d4331d857473b4dc49ca510951339541, type: 3}
+      propertyPath: spawnLocation.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7365194401896425807, guid: d4331d857473b4dc49ca510951339541, type: 3}
       propertyPath: m_Name
       value: LevelCollider
