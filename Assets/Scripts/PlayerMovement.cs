@@ -57,40 +57,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         // Set inversion
         if (lastClickedPos.x < transform.position.x)
         {
-            FlipX();
+            rend.flipX = true;
         }
         else if (lastClickedPos.x > transform.position.x)
         {
-            UnflipX();
+            rend.flipX = false;
         }
-    }
-
-    void FlipX()
-    {
-        if (view.IsMine)
-        {
-            view.RPC("FlipSprite", RpcTarget.AllBuffered);
-        }
-    }
-
-    void UnflipX()
-    {
-        if (view.IsMine)
-        {
-            view.RPC("UnflipSprite", RpcTarget.AllBuffered);
-        }
-    }
-
-    [PunRPC]
-    void FlipSprite()
-    {
-        if (rend != null) rend.flipX = true;
-    }
-
-    [PunRPC]
-    void UnflipSprite()
-    {
-        if (rend != null) rend.flipX = false;
     }
 
     //TODO: Make orientation stay accurate if player just joins.
