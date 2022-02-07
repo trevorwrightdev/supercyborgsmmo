@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviourPunCallbacks
 
     public void LoadLevel(string level)
     {
+        FindObjectOfType<GameCanvas>().loadCanvas.SetActive(true);
+
         levelName = level;
         PhotonNetwork.LeaveRoom();
     }
