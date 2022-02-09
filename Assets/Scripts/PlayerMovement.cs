@@ -57,44 +57,16 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         // Set inversion
         if (lastClickedPos.x < transform.position.x)
         {
-            FlipX();
+            anim.SetBool("isLeft", true);
         }
         else if (lastClickedPos.x > transform.position.x)
         {
-            UnflipX();
+            anim.SetBool("isLeft", false);
         }
     }
 
-    void FlipX()
-    {
-        if (view.IsMine)
-        {
-            view.RPC("FlipSprite", RpcTarget.AllBuffered);
-        }
-    }
-
-    void UnflipX()
-    {
-        if (view.IsMine)
-        {
-            view.RPC("UnflipSprite", RpcTarget.AllBuffered);
-        }
-    }
-
-    [PunRPC]
-    void FlipSprite()
-    {
-        if (rend != null) rend.flipX = true;
-    }
-
-    [PunRPC]
-    void UnflipSprite()
-    {
-        if (rend != null) rend.flipX = false;
-    }
-
-    //TODO: Make orientation stay accurate if player just joins.
     //TODO: Fix sorting layer issue
 
-    // If player collides with something we can make moving = false
+    // If player collides with something we can make moving = false, probably
+    // would also have to make it so lastClickedPos = transform.position
 }

@@ -7,11 +7,9 @@ public class SpawnPlayers : MonoBehaviour
 {
     public GameObject player;
 
-    Vector2 spawnPosition = new Vector2(0, 0);
-
     private void Start()
     {
-        PhotonNetwork.Instantiate(player.name, spawnPosition, Quaternion.identity);
+        PhotonNetwork.Instantiate(player.name, LevelManager.spawnPosition, Quaternion.identity);
     }
 
 }
