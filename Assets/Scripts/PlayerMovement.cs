@@ -6,6 +6,7 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     public Vector2 lastClickedPos;
+    public Vector2 syncedPosition;
     PhotonView view;
 
     private void Start()
@@ -22,21 +23,21 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         }
     }
 
-    // TODO: Make it so your coordinates are stored as integers on your character. But on the movement manager, it converts them to vectors.
-
     void Move()
     {
         if (Input.GetMouseButtonDown(0))
         {
             // TODO: Try all buffered so when a new player joins they get the changes.
-            view.RPC("SetMovePos", RpcTarget.All);
+            Vector2 destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            view.RPC("SetMovePos", RpcTarget.AllBuffered, destination);
         }
     }
 
     [PunRPC]
-    void SetMovePos()
+    void SetMovePos(Vector2 destination)
     {
-        lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lastClickedPos = destination;
     }
 
     // If player collides with something we can make moving = false, probably
