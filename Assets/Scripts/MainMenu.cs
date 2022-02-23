@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class MainMenu : MonoBehaviourPunCallbacks
 {
-    [SerializeField] const string roomName = "HyperniaHub";
+    [SerializeField] string roomName = "HyperniaHub";
 
     public void Play()
     {
