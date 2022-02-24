@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private void Start()
     {
         view = GetComponent<PhotonView>();
+
+        if (view.IsMine)
+        {
+            lastClickedPos = LevelManager.spawnPosition;
+        }
     }
 
     private void Update()
