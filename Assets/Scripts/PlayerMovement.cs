@@ -6,7 +6,6 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     public Vector2 lastClickedPos;
-    public Vector2 syncedPosition;
     PhotonView view;
 
     private void Start()
@@ -39,7 +38,4 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         lastClickedPos = destination;
     }
-
-    // If player collides with something we can make moving = false, probably
-    // would also have to make it so lastClickedPos = transform.position
 }
