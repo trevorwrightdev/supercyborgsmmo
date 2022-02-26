@@ -12,9 +12,14 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         view = GetComponent<PhotonView>();
 
+        // This is so we don't move to 0, 0 every time we load a new scene
         if (view.IsMine)
         {
             lastClickedPos = LevelManager.spawnPosition;
+        }
+        else
+        {
+            Debug.Log("Found another player");
         }
     }
 
@@ -31,7 +36,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // TODO: Try all buffered so when a new player joins they get the changes.
             Vector2 destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             view.RPC("SetMovePos", RpcTarget.AllBuffered, destination);

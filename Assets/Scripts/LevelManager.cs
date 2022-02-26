@@ -6,9 +6,6 @@ using Photon.Pun;
 
 public class LevelManager : MonoBehaviourPunCallbacks
 {
-    // We may have to make this a singleton in order to
-    // give next position to player
-
     public static Vector2 spawnPosition = new Vector2(0, 0);
     string levelName;
 
